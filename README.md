@@ -4,11 +4,9 @@
 
 ---
 
-## 📚 Table of Contents
-
-- [About](#about)
-- [Folder Structure](#folder-structure)
-- [Topics Covered](#topics-covered)
+- [OST-AJS-400 — Angular (AJS-400)](#ost-ajs-400--angular-ajs-400)
+  - [About](#about)
+  - [Folder Structure](#folder-structure)
 
 ---
 
@@ -27,21 +25,3 @@ OST-AJS-400/
 ├── assignments/     # Assignment solutions
 └── projects/        # Course projects and mini-apps
 ```
-
----
-
-## Topics Covered
-
-- TypeScript fundamentals
-- Angular CLI & project setup
-- Components, Templates & Data Binding
-- Directives (built-in & custom)
-- Pipes (built-in & custom)
-- Services & Dependency Injection
-- Routing & Navigation
-- Reactive Forms & Template-driven Forms
-- HTTP Client & REST API integration
-- RxJS & Observables
-- State management
-- Angular Modules & Lazy Loading
-- Unit Testing with Jasmine & Karma
