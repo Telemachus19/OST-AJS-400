@@ -28,18 +28,18 @@ const systemData: SystemRoles = {
   }, // DOEs
 };
 
-type UserWithoutAge = Omit<UserDetails, "age">;
+type agelessUser = Omit<UserDetails, "age">;
 
-const agelessUser: UserWithoutAge = {
+const agelessUser: agelessUser = {
   id: 3,
   firstName: "My",
   lastName: "Doe",
   Password: "1234",
 };
 
-type SecureFlexibleUser = Readonly<Partial<UserDetails>>;
+type readonlyUser = Readonly<Partial<UserDetails>>;
 
-const flexibleUser: SecureFlexibleUser = {
+const flexibleUser: readonlyUser = {
   id: 4,
   firstName: "Alex",
 };
