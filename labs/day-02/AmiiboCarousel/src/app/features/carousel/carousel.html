@@ -1,0 +1,51 @@
+<div class="container my-5 d-flex justify-content-center">
+
+    @if (isLoading) {
+    <div class="carousel-box d-flex justify-content-center align-items-center rounded shadow-sm bg-light">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    } @else if (errorMessage) {
+    <div class="carousel-box d-flex justify-content-center align-items-center rounded shadow-sm bg-light p-4">
+        <div class="alert alert-danger mb-0" role="alert">
+            {{ errorMessage }}
+        </div>
+    </div>
+    } @else {
+    <div class="carousel-box position-relative overflow-hidden rounded shadow bg-white">
+
+        <div class="carousel-track d-flex h-100" [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+
+            @for (item of items; track item.id; let i = $index) {
+            <div
+                class="carousel-slide w-100 flex-shrink-0 d-flex flex-column align-items-center justify-content-center p-4">
+                <img [src]="item.image" [alt]="item.name" class="amiibo-img img-fluid mb-4 rounded-circle shadow">
+
+                <div class="slide-caption text-center" [class.active-caption]="i === currentIndex">
+                    <h3 class="mb-1 fw-bold text-dark">{{ item.name }}</h3>
+                    <p class="text-muted mb-0 fw-semibold">{{ item.species }}</p>
+                </div>
+            </div>
+            }
+        </div>
+
+        <button class="carousel-nav-btn prev-btn" (click)="prevSlide()" aria-label="Previous Slide">
+            <span class="nav-icon">&#10094;</span>
+        </button>
+
+        <button class="carousel-nav-btn next-btn" (click)="nextSlide()" aria-label="Next Slide">
+            <span class="nav-icon">&#10095;</span>
+        </button>
+
+        <div class="carousel-dots">
+            @for (item of items; track item.id; let i = $index) {
+            <button type="button" class="dot" [class.active]="i === currentIndex" (click)="goToSlide(i)"
+                [attr.aria-label]="'Go to slide ' + (i + 1)">
+            </button>
+            }
+        </div>
+
+    </div>
+    }
+</div>

@@ -1,0 +1,15 @@
+<!-- Data Binding [one way - two way] -->
+ <!-- & interpolation / property binding / event -->
+  <h1>{{title}}</h1>
+  <div class="card" >
+  <!-- <img src="{{storedata.imgUrl}}" class="card-img-top" alt="..." height="300"> -->
+  <img [src]="storedata.imgUrl" class="card-img-top" alt="..." height="300">
+  <div class="card-body">
+    <h5 class="card-title">{{storedata.name}}</h5>
+
+    @for(branch of storedata.branches;track branch){
+      <p class="card-text">{{branch}}</p>
+    }
+    <button class="btn btn-primary" (click)="TestMethod()">Go somewhere</button>
+  </div>
+</div>
