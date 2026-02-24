@@ -1,0 +1,70 @@
+<div class="container py-5">
+    <header class="row mb-5">
+        <div class="col-12 col-lg-8 mx-auto">
+            <div class="text-center mb-4">
+                <h1 class="display-5 fw-bold text-dark">TechStore</h1>
+                <p class="text-muted">Premium gadgets at your fingertips</p>
+            </div>
+            <app-total-price [total]="cartTotal"></app-total-price>
+        </div>
+    </header>
+
+    <section class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm bg-white p-4">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label small fw-bold text-uppercase text-secondary">Category</label>
+                        <select class="form-select border-2" [formControl]="categoryCtrl">
+                            <option value="">All Categories</option>
+                            <option *ngFor="let cat of categories$ | async" [value]="cat">{{ cat }}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label small fw-bold text-uppercase text-secondary">Search</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-2 border-end-0"><i
+                                    class="bi bi-search"></i></span>
+                            <input type="text" class="form-control border-2 border-start-0"
+                                placeholder="Product name..." [formControl]="nameCtrl">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="d-flex justify-content-between">
+                            <label class="form-label small fw-bold text-uppercase text-secondary">Max Price</label>
+                            <span class="badge bg-primary">{{ priceCtrl.value | currency }}</span>
+                        </div>
+                        <input type="range" class="form-range" min="0" max="500" step="10" [formControl]="priceCtrl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="row g-4" *ngIf="filteredProducts$ | async as products; else loading">
+        <ng-container *ngIf="products.length > 0; else emptyState">
+            <div class="col-12 col-md-6 col-lg-4" *ngFor="let product of products; trackBy: trackById">
+                <app-product-card [product]="product" (addToCart)="handleAddToCart($event)">
+                </app-product-card>
+            </div>
+        </ng-container>
+
+        <ng-template #emptyState>
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-box-seam display-1 text-light"></i>
+                <h3 class="mt-3 text-muted">No items match your criteria</h3>
+                <button class="btn btn-outline-primary mt-2" (click)="resetFilters()">Clear Filters</button>
+            </div>
+        </ng-template>
+    </main>
+
+    <ng-template #loading>
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
+</div>
