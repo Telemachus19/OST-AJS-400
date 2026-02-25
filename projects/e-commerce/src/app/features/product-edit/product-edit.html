@@ -1,0 +1,68 @@
+<!-- State 1: Select Product to Edit -->
+<div *ngIf="!isEditing" class="card shadow-sm border-0">
+    <div class="card-header bg-secondary text-white fw-bold py-3">Select Product to Edit</div>
+    <div class="list-group list-group-flush">
+        <a *ngFor="let product of products$ | async" [routerLink]="['/edit', product.id]"
+            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3">
+            <div>
+                <h6 class="mb-0 fw-bold">{{ product.name }}</h6>
+                <small class="text-muted">{{ product.category }} - ${{ product.price }} | Stock: {{ product.available
+                    }}</small>
+            </div>
+            <button class="btn btn-sm btn-outline-primary">Edit <i class="bi bi-pencil ms-1"></i></button>
+        </a>
+    </div>
+</div>
+
+<!-- State 2: Edit Form -->
+<div *ngIf="isEditing" class="card shadow-sm border-0">
+    <div class="card-header bg-warning text-dark fw-bold py-3">
+        <i class="bi bi-pencil-square me-2"></i> Update Product #{{ currentId }}
+    </div>
+    <div class="card-body p-4">
+        <form (ngSubmit)="onUpdate()" #updateForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Product Name</label>
+                <input type="text" class="form-control" [(ngModel)]="editForm.name" name="name" required>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Price ($)</label>
+                    <input type="number" class="form-control" [(ngModel)]="editForm.price" name="price" required
+                        min="1">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Stock Quantity</label>
+                    <input type="number" class="form-control" [(ngModel)]="editForm.available" name="available" required
+                        min="0">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Category</label>
+                    <select class="form-select" [(ngModel)]="editForm.category" name="category" required>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Software">Software</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Description</label>
+                <textarea class="form-control" rows="3" [(ngModel)]="editForm.description" name="description"
+                    required></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Image URLs</label>
+                <input type="text" class="form-control" [(ngModel)]="editForm.imageUrlsStr" name="imageUrlsStr"
+                    required>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-warning w-50 py-2" [disabled]="!updateForm.valid">Update</button>
+                <a routerLink="/edit" class="btn btn-light w-50 py-2 border">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

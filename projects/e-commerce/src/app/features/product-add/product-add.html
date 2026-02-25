@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white fw-bold py-3">
+                <i class="bi bi-plus-circle me-2"></i> Create New Product
+            </div>
+            <div class="card-body p-4">
+                <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Product Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="product.name" name="name" required>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Price ($)</label>
+                            <input type="number" class="form-control" [(ngModel)]="product.price" name="price" required
+                                min="1">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Stock Quantity</label>
+                            <input type="number" class="form-control" [(ngModel)]="product.available" name="available"
+                                required min="0">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Category</label>
+                            <select class="form-select" [(ngModel)]="product.category" name="category" required>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Furniture">Furniture</option>
+                                <option value="Software">Software</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Description</label>
+                        <textarea class="form-control" rows="3" [(ngModel)]="product.description" name="description"
+                            required></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Image URLs (Comma separated)</label>
+                        <input type="text" class="form-control" [(ngModel)]="product.imageUrlsStr" name="imageUrlsStr"
+                            required>
+                        <div class="form-text">Provide up to 3 image links.</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100 py-2" [disabled]="!productForm.valid">
+                        Save Product
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

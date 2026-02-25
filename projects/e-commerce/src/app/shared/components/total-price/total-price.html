@@ -1,0 +1,5 @@
+<div class="d-flex align-items-center bg-light px-3 py-2 rounded border">
+    <span class="fw-bold me-2">Cart Total:</span>
+    <span class="badge bg-success fs-6">${{ total$ | async | number:'1.2-2' }}</span>
+    <span class="ms-2 text-muted small">({{ itemCount$ | async }} items)</span>
+</div>

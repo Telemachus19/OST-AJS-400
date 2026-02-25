@@ -1,0 +1,38 @@
+<div class="container py-4">
+    <!-- Filters Section -->
+    <div class="card shadow-sm mb-4 border-0 bg-light">
+        <div class="card-body row g-3 align-items-center">
+            <div class="col-md-4">
+                <label class="form-label fw-bold small">Search Name</label>
+                <input type="text" class="form-control" placeholder="Search products..."
+                    (input)="onSearchChange($event)">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold small">Category</label>
+                <select class="form-select" (change)="onCategoryChange($event)">
+                    <option value="">All Categories</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Furniture">Furniture</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold small">Max Price: ${{ priceFilter$ | async }}</label>
+                <input type="range" class="form-range" min="0" max="2000" step="50" [value]="priceFilter$ | async"
+                    (input)="onPriceChange($event)">
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="col" *ngFor="let product of filteredProducts$ | async">
+            <app-product-card [product]="product"></app-product-card>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="(filteredProducts$ | async)?.length === 0" class="text-center py-5 text-muted">
+        <h4>No products found</h4>
+        <p>Try adjusting your filters.</p>
+    </div>
+</div>
